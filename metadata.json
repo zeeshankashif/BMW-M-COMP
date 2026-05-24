@@ -1,0 +1,6 @@
+{
+  "name": "Zexan Mency",
+  "description": "An ultra-premium automotive portal featuring interactive engineering performance, custom spec tailoring, dynamic fluid interactive canvas responses, and precise performance telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
