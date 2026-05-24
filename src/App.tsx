@@ -20,6 +20,7 @@ export default function App() {
   const [showFloatingHud, setShowFloatingHud] = useState(false);
   const [isHudDismissed, setIsHudDismissed] = useState(false);
   const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
   // Maintain active configurator state to bind back into floating HUD
   const [customizedSpecs, setCustomizedSpecs] = useState<{
@@ -28,6 +29,11 @@ export default function App() {
     wheels?: PerformanceOption;
     finish?: PerformanceOption;
   }>({});
+
+  // Sync data-theme with the document root
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   // 1. Loading/Calibration Sequence
   useEffect(() => {
@@ -153,7 +159,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* RENDER DYNAMIC LIQUID WIND-TUNNEL CANVAS LAYER */}
-      <LiquidCanvas />
+      <LiquidCanvas theme={theme} />
 
       {/* TOP SCROLL DEPTH PROGRESS HUD */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-white/[0.02] z-50">
@@ -232,7 +238,11 @@ export default function App() {
       <main className="relative z-20">
         
         {/* 1. THE INITIAL HOOK: ASYMMETRICAL MOODY HERO PANEL */}
-        <HeroSection onScrollToCustomizer={handleScrollToCustomizer} />
+        <HeroSection 
+          onScrollToCustomizer={handleScrollToCustomizer} 
+          theme={theme} 
+          onToggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} 
+        />
 
         {/* 2. THE CUSTOMIZATION COMPILATOR CONSOLE */}
         <PerformanceCustomizer onStateChange={(specs) => setCustomizedSpecs(specs)} />

@@ -9,9 +9,11 @@ import m4FrontHero from '../assets/images/m4_front_hero_1779611846687.png';
 
 interface HeroSectionProps {
   onScrollToCustomizer: () => void;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
 }
 
-export default function HeroSection({ onScrollToCustomizer }: HeroSectionProps) {
+export default function HeroSection({ onScrollToCustomizer, theme = 'dark', onToggleTheme }: HeroSectionProps) {
   // Anim-bezier for sleek premium mechanical snaps
   const easeOutBezier = [0.16, 1, 0.3, 1];
 
@@ -29,11 +31,20 @@ export default function HeroSection({ onScrollToCustomizer }: HeroSectionProps) 
           <span className="text-[10px] tracking-[0.5em] uppercase text-zinc-500 mb-1">Research & Development // Laboratory</span>
           <h1 className="text-3xl font-black tracking-tighter leading-none text-white">ZEXAN MENCY<span className="text-veloce-coral font-bold">.</span></h1>
         </div>
-        <nav className="flex gap-6 md:gap-12 text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mt-4 md:mt-0 font-display">
-          <span className="text-white border-b-2 border-white pb-1 font-bold">Configurator</span>
-          <span className="hover:text-white transition-colors">Dynamics</span>
-          <span className="hover:text-white transition-colors">Propulsion</span>
-          <span className="hover:text-white transition-colors font-mono">V.26 CONCEPT</span>
+        <nav className="flex flex-wrap items-center gap-4 md:gap-8 text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mt-4 md:mt-0 font-display">
+          <span className="text-white border-b-2 border-white pb-1 font-bold cursor-pointer">Configurator</span>
+          <span className="hover:text-white transition-colors cursor-pointer">Dynamics</span>
+          <span className="hover:text-white transition-colors cursor-pointer font-mono">V.26 CONCEPT</span>
+          
+          {/* THEME SELECTOR SWITCH */}
+          <button 
+            onClick={onToggleTheme}
+            className="flex items-center space-x-2 border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 px-3 py-1 font-mono text-[9px] text-white tracking-widest uppercase transition-all duration-300 rounded-none cursor-pointer"
+          >
+            <span className={theme === 'dark' ? "text-veloce-coral font-bold" : "text-zinc-500"}>CARBON</span>
+            <span className="text-white/20">/</span>
+            <span className={theme === 'light' ? "text-veloce-coral font-bold" : "text-zinc-500"}>SILVER</span>
+          </button>
         </nav>
       </div>
 

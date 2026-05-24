@@ -6,7 +6,7 @@
 import { useEffect, useRef } from 'react';
 import { useMouseVelocity } from '../hooks/useMouseVelocity';
 
-export default function LiquidCanvas() {
+export default function LiquidCanvas({ theme = 'dark' }: { theme?: 'dark' | 'light' }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mouse = useMouseVelocity();
@@ -62,8 +62,8 @@ export default function LiquidCanvas() {
     const draw = () => {
       time += 0.005;
       
-      // Clear with dark matte texture
-      ctx.fillStyle = 'rgba(10, 10, 10, 0.15)'; 
+      // Clear with theme-aware matte texture
+      ctx.fillStyle = theme === 'dark' ? 'rgba(10, 10, 10, 0.15)' : 'rgba(219, 219, 223, 0.15)'; 
       ctx.fillRect(0, 0, width, height);
 
       // Smoothly interpolate current cursor variables
@@ -77,7 +77,7 @@ export default function LiquidCanvas() {
       const mVel = localMouse.current.velocity;
 
       // Draw aerodynamic grid guidelines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
+      ctx.strokeStyle = theme === 'dark' ? 'rgba(255, 255, 255, 0.015)' : 'rgba(14, 14, 14, 0.03)';
       ctx.lineWidth = 1;
       const gridSpacing = 60;
       for (let x = 0; x < width; x += gridSpacing) {
@@ -125,12 +125,18 @@ export default function LiquidCanvas() {
           }
         }
 
-        // Color transition based on cursor speed (fades in beautiful electric-blue details on extreme velocity)
+        // Color transition based on cursor speed (fades in beautiful details on extreme velocity)
         const activeRedAlpha = Math.min(1, mVel * 0.8);
         const gradient = ctx.createLinearGradient(0, 0, width, 0);
-        gradient.addColorStop(0, 'rgba(50, 50, 50, 0.04)');
-        gradient.addColorStop(0.5, `rgba(${Math.floor(50 - activeRedAlpha * 50)}, ${Math.floor(50 + activeRedAlpha * 190)}, ${Math.floor(50 + activeRedAlpha * 205)}, ${0.08 + activeRedAlpha * 0.3})`);
-        gradient.addColorStop(1, 'rgba(50, 50, 50, 0.04)');
+        if (theme === 'dark') {
+          gradient.addColorStop(0, 'rgba(50, 50, 50, 0.04)');
+          gradient.addColorStop(0.5, `rgba(${Math.floor(50 - activeRedAlpha * 50)}, ${Math.floor(50 + activeRedAlpha * 190)}, ${Math.floor(50 + activeRedAlpha * 205)}, ${0.08 + activeRedAlpha * 0.3})`);
+          gradient.addColorStop(1, 'rgba(50, 50, 50, 0.04)');
+        } else {
+          gradient.addColorStop(0, 'rgba(180, 180, 185, 0.04)');
+          gradient.addColorStop(0.5, `rgba(${Math.floor(0)}, ${Math.floor(136 - activeRedAlpha * 36)}, ${Math.floor(204 + activeRedAlpha * 51)}, ${0.08 + activeRedAlpha * 0.3})`);
+          gradient.addColorStop(1, 'rgba(180, 180, 185, 0.04)');
+        }
 
         ctx.strokeStyle = gradient;
         ctx.stroke();
@@ -165,11 +171,11 @@ export default function LiquidCanvas() {
         ctx.beginPath();
         ctx.arc(drawX, drawY, p.size, 0, Math.PI * 2);
         
-        // Soft white ambient particles, turning into glowing electric blue tails as cursor velocity peaks
+        // Soft white/dark ambient particles, turning into glowing electric blue tails as cursor velocity peaks
         if (mVel > 0.4 && dist < 280) {
-          ctx.fillStyle = `rgba(0, 240, 255, ${p.alpha * 1.5})`;
+          ctx.fillStyle = theme === 'dark' ? `rgba(0, 240, 255, ${p.alpha * 1.5})` : `rgba(0, 136, 204, ${p.alpha * 1.5})`;
         } else {
-          ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+          ctx.fillStyle = theme === 'dark' ? `rgba(255, 255, 255, ${p.alpha})` : `rgba(14, 14, 14, ${p.alpha})`;
         }
         ctx.fill();
       });
@@ -183,7 +189,7 @@ export default function LiquidCanvas() {
       resizeObserver.disconnect();
       cancelAnimationFrame(animationId);
     };
-  }, [mouse]);
+  }, [mouse, theme]);
 
   return (
     <div ref={containerRef} id="aerospace-viewport" className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-10">
