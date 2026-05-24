@@ -5,6 +5,7 @@
 
 import { motion } from 'motion/react';
 import { ArrowDown, Cpu, Compass, Sliders, Shield } from 'lucide-react';
+import m4FrontHero from '../assets/images/m4_front_hero_1779611846687.png';
 
 interface HeroSectionProps {
   onScrollToCustomizer: () => void;
@@ -168,7 +169,7 @@ export default function HeroSection({ onScrollToCustomizer }: HeroSectionProps) 
 
             {/* Front quarter generated image */}
             <img 
-              src="/src/assets/images/m4_front_hero_1779611846687.png" 
+              src={m4FrontHero} 
               alt="Matte Black M4 Competition Concept - front quarter rendering" 
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover grayscale brightness-90 contrast-125 transition-all duration-700 hover:scale-105 hover:grayscale-0"

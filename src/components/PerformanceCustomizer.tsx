@@ -8,13 +8,18 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SpecCategory, PerformanceOption } from '../types';
 import { Flame, Wind, Disc, Eye, ChevronRight, Check } from 'lucide-react';
 
+import chassisWheel from '../assets/images/chassis_wheel_1779611917546.png';
+import engineEngine from '../assets/images/engine_engine_1779611892969.png';
+import m4FrontHero from '../assets/images/m4_front_hero_1779611846687.png';
+import m4RearProfile from '../assets/images/m4_rear_profile_1779611872987.png';
+
 // Static spec configurator dataset tying back to real-scale metrics for Matte Black BMW M4
 const CONFIGURATOR_DATA = {
   engine: {
     title: 'FORGED POWERPLANT',
     subtitle: 'Calibrate mapping parameters and twin-scroll scrolls.',
     icon: Flame,
-    image: '/src/assets/images/engine_engine_1779611892969.png',
+    image: engineEngine,
     options: [
       {
         id: 'eng-oem',
@@ -58,7 +63,7 @@ const CONFIGURATOR_DATA = {
     title: 'AERO EXPULSION TUNNELS',
     subtitle: 'Vary downward forces and laminar slip parameters.',
     icon: Wind,
-    image: '/src/assets/images/m4_rear_profile_1779611872987.png',
+    image: m4RearProfile,
     options: [
       {
         id: 'aero-oem',
@@ -105,7 +110,7 @@ const CONFIGURATOR_DATA = {
     title: 'LIGHTWEIGHT CHASSIS ROTORS',
     subtitle: 'Alter rotational mass, width profiles, and calliper reactions.',
     icon: Disc,
-    image: '/src/assets/images/chassis_wheel_1779611917546.png',
+    image: chassisWheel,
     options: [
       {
         id: 'whl-oem',
@@ -149,7 +154,7 @@ const CONFIGURATOR_DATA = {
     title: 'SPECULAR GLOSS SHIELD',
     subtitle: 'Tailor light reflection structures and heat absorption layers.',
     icon: Eye,
-    image: '/src/assets/images/m4_front_hero_1779611846687.png',
+    image: m4FrontHero,
     options: [
       {
         id: 'fin-oem',

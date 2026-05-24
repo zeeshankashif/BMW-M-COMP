@@ -8,12 +8,17 @@ import { motion, AnimatePresence } from 'motion/react';
 import { TelemetryGridItem } from '../types';
 import { Cpu, Activity, CircleAlert, Minimize2, ChevronRight } from 'lucide-react';
 
+import chassisWheel from '../assets/images/chassis_wheel_1779611917546.png';
+import engineEngine from '../assets/images/engine_engine_1779611892969.png';
+import m4FrontHero from '../assets/images/m4_front_hero_1779611846687.png';
+import m4RearProfile from '../assets/images/m4_rear_profile_1779611872987.png';
+
 const MEDIA_GRID_ITEMS: TelemetryGridItem[] = [
   {
     id: 'monocoque-front',
     title: 'MONOCOQUE ANTHRACITE SHELL',
     subtitle: 'Stealth housing with dynamic active grill flow dams.',
-    image: '/src/assets/images/m4_front_hero_1779611846687.png',
+    image: m4FrontHero,
     aspect: 'landscape',
     coordinates: 'LAT_REF_48_135[X:882]',
     frequency: '92.4 Hz vibration threshold',
@@ -28,7 +33,7 @@ const MEDIA_GRID_ITEMS: TelemetryGridItem[] = [
     id: 'engine-thermal',
     title: 'THERMAL COMBUSTION ENGINE',
     subtitle: 'Precision twin-scroll turbine spool management core.',
-    image: '/src/assets/images/engine_engine_1779611892969.png',
+    image: engineEngine,
     aspect: 'portrait',
     coordinates: 'CYL_BANK_1_6[CH:4]',
     frequency: '8,200 RPM redline ceiling',
@@ -43,7 +48,7 @@ const MEDIA_GRID_ITEMS: TelemetryGridItem[] = [
     id: 'chassis-rotors',
     title: 'FORGED UNSPLUNG ROTORS',
     subtitle: 'Lightweight rotational magnesium and ceramic response hubs.',
-    image: '/src/assets/images/chassis_wheel_1779611917546.png',
+    image: chassisWheel,
     aspect: 'square',
     coordinates: 'HUB_RE_L_09[RAD:20]',
     frequency: '76.2 rad/sec deflection limit',
@@ -58,7 +63,7 @@ const MEDIA_GRID_ITEMS: TelemetryGridItem[] = [
     id: 'airflow-vectorizer',
     title: 'LAMINAR VECTOR COUPLER',
     subtitle: 'Active trailing air diffuser and drag reduction spoiler.',
-    image: '/src/assets/images/m4_rear_profile_1779611872987.png',
+    image: m4RearProfile,
     aspect: 'landscape',
     coordinates: 'DIFF_AER_998[Z:114]',
     frequency: '18.4 kN vertical suction load',
